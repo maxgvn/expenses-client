@@ -10,16 +10,16 @@ class App extends Component {
     isLoaded: false
   };
 
-  async componentDidMount() {
-    try {
-      const response = await axios.get(
-        "https://short-url-max-gavanon.herokuapp.com/api/links"
-      );
-      this.setState({ arrayLinks: response.data, isLoaded: true });
-    } catch (error) {
-      alert(error);
-    }
-  }
+  // async componentDidMount() {
+  //   try {
+  //     const response = await axios.get(
+  //       "https://short-url-max-gavanon.herokuapp.com/api/links"
+  //     );
+  //     this.setState({ arrayLinks: response.data, isLoaded: true });
+  //   } catch (error) {
+  //     alert(error);
+  //   }
+  // }
 
   render() {
     return (
