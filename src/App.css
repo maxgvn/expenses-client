@@ -7,9 +7,9 @@
   flex-direction: row;
   justify-content: space-around;
 
-  width: 800px;
+  width: 900px;
   margin: auto;
-  margin-top: 200px;
+  margin-top: 100px;
   height: auto;
   border: 2px solid black;
 }
@@ -30,5 +30,16 @@
 }
 
 h1 {
-  font-size: 30px;
+  font-size: 25px;
+}
+
+li {
+  text-align: left;
+  font-size: 15px;
+  line-height: 20px;
+  padding: 0px;
+}
+
+input > text {
+  width: 100px;
 }
