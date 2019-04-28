@@ -21,8 +21,12 @@ class App extends Component {
   }
 
   updateInfo = async () => {
-    const usersGet = await axios.get("http://localhost:3000/api/users");
-    const expensesGet = await axios.get("http://localhost:3000/api/expenses");
+    const usersGet = await axios.get(
+      "https://expenses-back-max-gavanon.herokuapp.com/api/users"
+    );
+    const expensesGet = await axios.get(
+      "https://expenses-back-max-gavanon.herokuapp.com/api/expenses"
+    );
     this.setState({
       users: usersGet.data,
       expenses: expensesGet.data
@@ -40,9 +44,12 @@ class App extends Component {
 
   handleSubmitUser = async () => {
     try {
-      await axios.post("http://localhost:3000/api/usercreate", {
-        name: this.state.userName
-      });
+      await axios.post(
+        "https://expenses-back-max-gavanon.herokuapp.com/api/usercreate",
+        {
+          name: this.state.userName
+        }
+      );
 
       this.updateInfo();
     } catch (error) {
@@ -52,11 +59,14 @@ class App extends Component {
 
   handleSubmitExpense = async () => {
     try {
-      await axios.post("http://localhost:3000/api/expensecreate", {
-        description: this.state.expenseDescription,
-        amount: this.state.expenseAmount,
-        user: this.state.expenseUser
-      });
+      await axios.post(
+        "https://expenses-back-max-gavanon.herokuapp.com/api/expensecreate",
+        {
+          description: this.state.expenseDescription,
+          amount: this.state.expenseAmount,
+          user: this.state.expenseUser
+        }
+      );
 
       this.updateInfo();
     } catch (error) {
@@ -118,7 +128,7 @@ class App extends Component {
                       <span
                         onClick={async () => {
                           await axios.post(
-                            "http://localhost:3000/api/deleteexpense?id=" +
+                            "https://expenses-back-max-gavanon.herokuapp.com/api/deleteexpense?id=" +
                               expense._id
                           );
                           this.updateInfo();
