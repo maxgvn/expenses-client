@@ -21,7 +21,6 @@ class App extends Component {
   }
 
   updateInfo = async () => {
-    // On demande la liste à jour des tâches au serveur
     const usersGet = await axios.get("http://localhost:3000/api/users");
     const expensesGet = await axios.get("http://localhost:3000/api/expenses");
     this.setState({
@@ -32,7 +31,6 @@ class App extends Component {
 
   handleChange = event => {
     const name = event.target.name;
-
     const value = event.target.value;
 
     this.setState({
@@ -67,6 +65,16 @@ class App extends Component {
   };
 
   render() {
+    const userTotals = this.state.expenses.reduce((totals, expense) => {
+      if (!totals[expense.User._id]) {
+        totals[expense.User._id] = expense.Amount;
+      } else {
+        totals[expense.User._id] += expense.Amount;
+      }
+      return totals;
+    }, {});
+    console.log(userTotals, "usertotals");
+
     return (
       <div className="App">
         <div className="four-main">
@@ -77,7 +85,7 @@ class App extends Component {
                 {this.state.users.map((user, index) => {
                   return (
                     <li key={index}>
-                      {user.name} - €{user.expensestotal}
+                      {user.name} - €{userTotals[user._id]}
                     </li>
                   );
                 })}
@@ -116,10 +124,8 @@ class App extends Component {
                           this.updateInfo();
                         }}
                       >
-                        <p>
-                          {expense.Description} - {expense.User.name} - €
-                          {expense.Amount}
-                        </p>
+                        {expense.Description} - {expense.User.name} - €
+                        {expense.Amount}
                       </span>
                     </li>
                   );
@@ -150,6 +156,9 @@ class App extends Component {
                   name="expenseUser"
                   onChange={this.handleChange}
                 >
+                  <option value="" disabled selected>
+                    Select a user
+                  </option>
                   {this.state.users.map((user, index) => {
                     return (
                       <option value={user._id} key={index}>
